@@ -2,11 +2,14 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from flask import Flask, render_template, request, redirect, url_for
 import random
+import pandas as pd
 
 app = Flask(__name__)
 
-# REPLACE 'YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', and 'YOUR_REDIRECT_URI'
-# with your actual credentials obtained from your Spotify Developer account.
+CLIENT_ID = pd.read_csv('secrets.txt', header=None)[0][0]
+CLIENT_SECRET = pd.read_csv('secrets.txt', header=None)[0][1]
+
+
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id='f5e1cd1aef244438b9f9e921623d830f',
                                                client_secret='789fdb605d0b48faa9291198c83e570f',
                                                redirect_uri='http://localhost:3000',
@@ -65,14 +68,12 @@ def adjust_percentages(playlist_percentages):
 def index():
     playlists = get_playlists()
     playlist_ids = [playlist['id'] for playlist in playlists]
-    # CHANGE: Initialize all percentages at 0 for each playlist
     playlist_percentages = {playlist_id: 0 for playlist_id in playlist_ids}
     return render_template('index.html', playlists=playlists, playlist_percentages=playlist_percentages)
 
 @app.route('/select_tracks', methods=['POST'])
 def select_tracks():
     playlist_percentages = {playlist_id: int(request.form.get(playlist_id, 0)) for playlist_id in request.form}
-    # CHANGE: Adjust percentages to ensure the total does not exceed 100
     adjust_percentages(list(playlist_percentages.values()))
 
     selected_tracks = {}
@@ -92,14 +93,11 @@ def select_tracks():
 
             selected_tracks[playlist_id] = [weighted_random_choice(weighted_tracks, feature_averages) for _ in range(num_tracks_to_select)]
 
-    # You can now process the selected tracks as you desire, e.g., add them to the play next queue.
     add_songs_to_queue(selected_tracks)
 
     return redirect(url_for('index'))
 
 def add_songs_to_queue(selected_tracks):
-    # Implement the code to add the selected tracks to the play next queue.
-    # In this example, we'll print the selected tracks.
 
     print("Tracks to be added to the play next queue:")
     for playlist_id, tracks in selected_tracks.items():

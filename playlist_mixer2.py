@@ -8,8 +8,13 @@ import random
 import pandas as pd
 import requests
 
-sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id='f5e1cd1aef244438b9f9e921623d830f',
-                                            client_secret='789fdb605d0b48faa9291198c83e570f',
+
+
+CLIENT_ID = pd.read_csv('secrets.txt', header=None)[0][0]
+CLIENT_SECRET = pd.read_csv('secrets.txt', header=None)[0][1]
+
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID,
+                                            client_secret= CLIENT_SECRET,
                                             redirect_uri='http://localhost:3000',
                                             scope='playlist-read-private user-read-recently-played user-read-playback-state user-modify-playback-state'))
 
