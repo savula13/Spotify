@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Tracks</title>
+</head>
+<body>
+    <h1>Select Tracks from Playlists</h1>
+    <form method="post" action="{{ url_for('select_tracks') }}">
+        {% for playlist in playlists %}
+            <p>
+                <strong>{{ playlist.name }}</strong><br>
+                <label for="{{ playlist.id }}">Percentage (0-100):</label>
+                <input type="number" name="{{ playlist.id }}" min="0" max="100" value="0">
+            </p>
+        {% endfor %}
+        <input type="submit" value="Add to Play Next Queue">
+    </form>
+</body>
+</html>

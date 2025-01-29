@@ -1,0 +1,14 @@
+                 added_at  ...            album name
+0    2020-10-29T06:24:03Z  ...    Innocent Country 2
+1    2020-10-29T06:29:40Z  ...    Innocent Country 2
+2    2020-10-29T06:39:11Z  ...    Innocent Country 2
+3    2020-10-29T18:28:21Z  ...               ATLiens
+4    2020-10-29T18:35:31Z  ...               ATLiens
+..                    ...  ...                   ...
+662  2023-10-01T01:14:42Z  ...                   9AM
+663  2023-10-01T01:17:23Z  ...      LONERWRLD, vol 1
+664  2023-10-01T01:22:03Z  ...             NYCKSTAPE
+665  2023-10-01T01:24:17Z  ...  Fantastic, Vol. 2.10
+666  2023-10-02T00:08:21Z  ...         LIGHTER FLUID
+
+[667 rows x 7 columns]
